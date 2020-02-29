@@ -12,7 +12,7 @@ if space is not True:
 
 
 Plaintext='*'*offset+Plaintext # filling with dummy character at the front
-offset=offset%(2*keye-1)
+offset=offset%(2*keye-1) # offset at most can be twice the key minus 1
 Len=len(Plaintext)
 G=2*(keye-1) # this is the distance between the two sharp edges of the fence
 Cipher=""
@@ -43,16 +43,7 @@ for i in range(keye):
                 if i<=E or i!=j-(G-2*i) or offset<=keye:
                     Cipher=Cipher+(Plaintext[j])                                                 
                 j=j+2*i
-
-    
-
-
-
-
-
-
-
-    
+   
         
    
 
