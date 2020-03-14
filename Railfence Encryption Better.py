@@ -1,16 +1,22 @@
-Plaintext="abcdefghijkl"
-keye=4
-offset=1
+
+
+Plaintext="abcdefghijkl" # the data used can be programmed to be from the user
+keye=4 # the key
+offset=1 # the offset
 
 offset=offset%(2*keye-1) # offset at most can be twice the key minus 1
 
-Plaintext='*'*offset+Plaintext
-Cipher=['']*keye
+
+
+Plaintext='*'*offset+Plaintext # populating the plaintext with a string of length ==offset
+
+Cipher=['']*keye 
 
 Len=len(Plaintext)
 index=0
-inc= True
+inc=True # this is useful to control the path of the iteration from down to up and viceversa
 i=0
+
 while  i < Len:    
     Cipher[index]=Cipher[index]+ Plaintext[i]
     if inc is True:
@@ -23,5 +29,9 @@ while  i < Len:
     if index==0:
         inc =True
     i=i+1
-    
-print (''.join(Cipher)[offset:])
+
+for i in range(keye):
+    Cipher[i]=Cipher[i].replace('*','')
+  
+print(''.join(Cipher))
+print(Plaintext[offset:])
