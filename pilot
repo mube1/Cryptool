@@ -1,0 +1,75 @@
+Cipher="ieldfcoaiostlne"
+keye=5
+offset=2
+clean=Cipher
+Cipher=offset*'*'+"lfoiiesdlcnaeot"
+Plaintext=""
+
+Len=len(Cipher)
+Col=[0]*keye
+index=0
+inc=True # this is useful to control the path of the iteration from down to up and viceversa
+i=0
+
+while  i < Len:    
+    Col[index]=Col[index]+1
+    if inc is True: 
+        index=index+1
+    else:
+        index=index-1
+
+    if (index==keye-1):
+        inc=False
+    if index==0:
+        inc =True
+    i=i+1
+
+iterator=0
+Result=[None]*keye
+for r in range(keye):
+    Result[r]=[None]*Col[r]
+    for q in range(Col[r]):
+        if q == 0 and r < offset:
+            Result[r][q]='*'
+        else:
+            Result[r][q]=clean[iterator]
+            iterator=iterator+1
+
+z=0
+index=0
+inc = True
+col=0
+some=0
+while z < Len:
+    Plaintext=Plaintext+Result[index][col]
+    print(Plaintext)
+    some=len(Plaintext)%keye
+
+    if index==0:
+        inc = True        
+    if index == keye-1:        
+        inc = False
+
+    if some==0:
+        col=col+1
+
+    if inc is True: 
+        index=index+1
+    else:
+        index=index-1
+    
+    z=z+1
+
+
+    
+
+
+
+
+
+
+print(Plaintext)
+print(Result)
+
+
+
