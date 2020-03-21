@@ -62,8 +62,7 @@ if offset < keye:
                 Result[r][q]=clean[iterator]
                 iterator=iterator+1
    
-else:
-    
+else:    
     O=keye - (offset-keye)-1
     rr=keye-1
     while rr>=0: # placing cipher to bring unfiltered cipher
