@@ -1,6 +1,6 @@
-Cipher="rnLaecifel"
+Cipher="vneiihg"
 keye=4
-offset=5
+offset=4
 offset=offset%(2*keye-1) # offset at most can be twice the key minus 1
 
 
@@ -10,7 +10,7 @@ the final algorithm
 
 determine the number of characters on each row
 construct a total of 'k' strings whose for each row
-the fill in the constructed spaces with the charcters from the cipher
+the fill in the constructed spaces with the charcters from the secret
 //by now if the constructed strings are printer on the array, it somehow resembles the visual
 build a downward string
 reverse odd strings
@@ -20,11 +20,11 @@ reverse all characters
 '''
 
 
-clean=Cipher
-Cipher=offset*'*'+Cipher
-Plaintext=""
 
-Len=len(Cipher)
+
+Plaintext=""
+Len=len(Cipher)+offset
+
 Col=[0]*keye # to count the distribution of chracters on a row
 index=0
 inc=True # this is useful to control the path of the iteration from down to up and viceversa
@@ -46,44 +46,25 @@ while  i < Len:
 
 iterator=0
 Result=[None]*keye
-master=''
 maxrow=0
 
 
-if offset < keye:
-    for r in range(keye): # placing cipher to bring unfiltered cipher
-        Result[r]=[None]*Col[r]
-        maxrow=max(maxrow,Col[r])
-        
-        for q in range(Col[r]):
-            if q==0 and r < offset:     # first element of and disturbed row
-                Result[r][q]='*'
-            else:
-                Result[r][q]=clean[iterator]
-                iterator=iterator+1
-   
-else:    
-    O=keye - (offset-keye)-1
-    rr=keye-1
-    while rr>=0: # placing cipher to bring unfiltered cipher
-        Result[rr]=[None]*Col[rr]
-        maxrow=max(maxrow,Col[rr])
-
-        for jj in range(1,Col[rr]):       
-            if jj == 0 and rr >=O:# first element of and disturbed row
-                Result[rr][jj]='*'
-            else:
-                Result[rr][jj]=clean[iterator]
-                iterator=iterator+1
-            
-        rr=rr-1
+O=keye-(offset%(keye)+1)
+for r in range(keye): # placing  to bring unfiltered 
+    Result[r]=[None]*Col[r]
+    maxrow=max(maxrow,Col[r])
     
+    for q in range(Col[r]):
+        if (q==0 and r < offset) or (q-1==0 and r>=O and r != keye-1): # first element of and disturbed row
+            Result[r][q]='*'
+        else:
+            Result[r][q]=Cipher[iterator]
+            iterator=iterator+1
+
+
+
     
-
-      
-     
-
-
+  
 z=0
 index=0
 inc = True
@@ -94,7 +75,6 @@ we=0
 #printing result
 for we in range(keye):
     print(Result[we])
-
 
 
 Answer=[""]*maxrow
@@ -110,8 +90,7 @@ for columun in range(maxrow):
     print(Answer[columun])        
 
 # before reversing
-for ss in range(1,maxrow-2):    
-
+for ss in range(1,maxrow-2):
     if ss % 2 !=0:
        Answer[ss+1]=Answer[ss+1]+Answer[ss][-1]
        Answer[ss]=Answer[ss][:-1]
